@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gautam Verma - Data & AI Enablement Leader with 15 years experience in government and enterprise transformation across GCC">
+    <meta name="keywords" content="Data & AI, Chief Data Officer, Data Governance, AI Strategy, GCC, UAE, Abu Dhabi">
     <title>Gautam Verma — Data & AI Catalyst</title>
     
     <!-- Google Fonts -->
@@ -66,6 +68,24 @@
             margin: 0 auto;
             position: relative;
             z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .hero-text {
+            grid-column: 1;
+        }
+        
+        .profile-image {
+            grid-column: 2;
+            width: 300px;
+            height: 300px;
+            border-radius: 4px;
+            object-fit: cover;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            border: 3px solid white;
         }
         
         .eyebrow {
@@ -85,7 +105,7 @@
         
         h1 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(48px, 7vw, 92px);
+            font-size: clamp(48px, 7vw, 72px);
             font-weight: 300;
             line-height: 1.1;
             margin-bottom: 30px;
@@ -104,9 +124,9 @@
         }
         
         .hero-subtitle {
-            font-size: 22px;
+            font-size: 20px;
             line-height: 1.7;
-            max-width: 700px;
+            max-width: 650px;
             margin-bottom: 50px;
             font-weight: 300;
             color: var(--mid-gray);
@@ -115,9 +135,9 @@
         
         .hero-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 40px;
-            max-width: 900px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 650px;
             animation: fadeIn 1s ease-out 0.6s backwards;
         }
         
@@ -133,7 +153,7 @@
         
         .stat-number {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 48px;
+            font-size: 42px;
             font-weight: 500;
             color: var(--charcoal);
             display: block;
@@ -173,6 +193,50 @@
             font-weight: 400;
             line-height: 1.2;
             max-width: 800px;
+        }
+        
+        /* Photo Gallery */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .photo-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            aspect-ratio: 4/3;
+            background: var(--light-gray);
+        }
+        
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .photo-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 40px 20px 20px;
+            font-size: 14px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .photo-item:hover .photo-caption {
+            transform: translateY(0);
         }
         
         /* Timeline */
@@ -429,6 +493,18 @@
         
         /* Responsive */
         @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .profile-image {
+                grid-column: 1;
+                width: 250px;
+                height: 250px;
+                margin: 0 auto;
+            }
+            
             .hero {
                 padding: 60px 40px;
             }
@@ -486,6 +562,11 @@
                 flex-direction: column;
                 gap: 20px;
             }
+            
+            .profile-image {
+                width: 200px;
+                height: 200px;
+            }
         }
     </style>
 </head>
@@ -493,29 +574,64 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <div class="eyebrow">Portfolio · Data & AI Leadership</div>
-            <h1>Gautam Verma<br><span class="accent">Catalyst for Intelligent Transformation</span></h1>
-            <p class="hero-subtitle">
-                15 years architecting the human foundation that makes Data & AI work—from oil fields to government ministries, 
-                building cultures where technology thrives and adoption becomes inevitable.
-            </p>
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-number">20,000+</span>
-                    <span class="stat-label">Employees Enabled</span>
+            <div class="hero-text">
+                <div class="eyebrow">Portfolio · Data & AI Leadership</div>
+                <h1>
+                    Gautam Verma<br>
+                    <span class="accent">Catalyst for Intelligent Transformation</span>
+                </h1>
+                <p class="hero-subtitle">
+                    15 years architecting the human foundation that makes Data & AI work—from oil fields to government ministries, 
+                    building cultures where technology thrives and adoption becomes inevitable.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">20,000+</span>
+                        <span class="stat-label">Employees Enabled</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">150+</span>
+                        <span class="stat-label">Data Leaders Coached</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">200+</span>
+                        <span class="stat-label">Training Programs</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">30%</span>
+                        <span class="stat-label">Failure Reduction</span>
+                    </div>
                 </div>
-                <div class="stat">
-                    <span class="stat-number">150+</span>
-                    <span class="stat-label">Data Leaders Coached</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">200+</span>
-                    <span class="stat-label">Training Programs Delivered</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">30%</span>
-                    <span class="stat-label">Failure Rate Reduction</span>
-                </div>
+            </div>
+            
+            <!-- Profile Image - Replace with your actual photo -->
+            <img src="images/profile.jpg" alt="Gautam Verma" class="profile-image" 
+                 onerror="this.style.display='none'">
+        </div>
+    </section>
+
+    <!-- Speaking & Thought Leadership Gallery -->
+    <section style="background: white;">
+        <div class="section-header">
+            <div class="section-label">Thought Leadership</div>
+            <h2 class="section-title">Speaking & community engagement</h2>
+        </div>
+        <div class="photo-gallery">
+            <!-- Replace these with your actual images -->
+            <div class="photo-item">
+                <img src="images/speaking/event-1.jpg" alt="Data & AI Forum GCC" 
+                     onerror="this.src='https://via.placeholder.com/600x450/2EC4B6/ffffff?text=Speaking+Event+1'">
+                <div class="photo-caption">Data & AI Forum GCC · Keynote Speaker</div>
+            </div>
+            <div class="photo-item">
+                <img src="images/speaking/event-2.jpg" alt="Government Data Summit" 
+                     onerror="this.src='https://via.placeholder.com/600x450/D4A574/ffffff?text=Speaking+Event+2'">
+                <div class="photo-caption">Abu Dhabi Government Summit · Panel Discussion</div>
+            </div>
+            <div class="photo-item">
+                <img src="images/speaking/event-3.jpg" alt="CDMP Training Program" 
+                     onerror="this.src='https://via.placeholder.com/600x450/2EC4B6/ffffff?text=Training+Program'">
+                <div class="photo-caption">CDMP Master Certification · Lead Instructor</div>
             </div>
         </div>
     </section>
@@ -573,7 +689,7 @@
     </section>
 
     <!-- Career Timeline -->
-    <section>
+    <section style="background: white;">
         <div class="section-header">
             <div class="section-label">Experience</div>
             <h2 class="section-title">Journey through complexity</h2>
@@ -642,7 +758,7 @@
     </section>
 
     <!-- Expertise -->
-    <section style="background: white;">
+    <section>
         <div class="section-header">
             <div class="section-label">Capabilities</div>
             <h2 class="section-title">Depth across the transformation stack</h2>
@@ -685,7 +801,7 @@
     </section>
 
     <!-- Certifications -->
-    <section>
+    <section style="background: white;">
         <div class="section-header">
             <div class="section-label">Credentials</div>
             <h2 class="section-title">Certified mastery</h2>

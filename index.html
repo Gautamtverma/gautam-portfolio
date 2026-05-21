@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gautam Verma — Data & AI Catalyst</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --cream: #FAF7F2;
+            --charcoal: #1A1A1A;
+            --accent-teal: #2EC4B6;
+            --accent-warm: #D4A574;
+            --mid-gray: #666666;
+            --light-gray: #E8E4DC;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 80px 60px;
+            position: relative;
+            background: linear-gradient(135deg, #FAF7F2 0%, #F0EDE6 100%);
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(46,196,182,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-30px, -30px) scale(1.05); }
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .eyebrow {
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--mid-gray);
+            margin-bottom: 20px;
+            font-weight: 500;
+            animation: slideDown 1s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(48px, 7vw, 92px);
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            animation: slideUp 1s ease-out 0.2s backwards;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 .accent {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--accent-teal);
+        }
+        
+        .hero-subtitle {
+            font-size: 22px;
+            line-height: 1.7;
+            max-width: 700px;
+            margin-bottom: 50px;
+            font-weight: 300;
+            color: var(--mid-gray);
+            animation: slideUp 1s ease-out 0.4s backwards;
+        }
+        
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 40px;
+            max-width: 900px;
+            animation: fadeIn 1s ease-out 0.6s backwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .stat {
+            border-left: 2px solid var(--accent-warm);
+            padding-left: 20px;
+        }
+        
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 500;
+            color: var(--charcoal);
+            display: block;
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--mid-gray);
+            margin-top: 8px;
+            font-weight: 400;
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 120px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            margin-bottom: 80px;
+        }
+        
+        .section-label {
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent-teal);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 400;
+            line-height: 1.2;
+            max-width: 800px;
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 60px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, var(--accent-teal), transparent);
+        }
+        
+        .timeline-item {
+            margin-bottom: 80px;
+            position: relative;
+            opacity: 0;
+            animation: fadeInSlide 0.8s ease-out forwards;
+        }
+        
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+        
+        @keyframes fadeInSlide {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -66px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--cream);
+        }
+        
+        .timeline-date {
+            font-size: 14px;
+            color: var(--mid-gray);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .timeline-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--charcoal);
+        }
+        
+        .timeline-org {
+            font-size: 16px;
+            color: var(--accent-teal);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .timeline-description {
+            color: var(--mid-gray);
+            line-height: 1.8;
+            max-width: 700px;
+        }
+        
+        .timeline-description ul {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+        
+        .timeline-description li {
+            margin-bottom: 8px;
+        }
+        
+        /* Accomplishments Grid */
+        .accomplishments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .accomplishment-card {
+            background: white;
+            padding: 40px;
+            border-radius: 4px;
+            border-left: 3px solid var(--accent-warm);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .accomplishment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+        
+        .accomplishment-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            color: var(--accent-warm);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .accomplishment-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--charcoal);
+        }
+        
+        /* Expertise Section */
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            margin-top: 60px;
+        }
+        
+        .expertise-category h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--charcoal);
+            font-weight: 500;
+        }
+        
+        .expertise-list {
+            list-style: none;
+        }
+        
+        .expertise-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--light-gray);
+            color: var(--mid-gray);
+            font-size: 15px;
+            transition: color 0.2s ease, padding-left 0.2s ease;
+        }
+        
+        .expertise-list li:hover {
+            color: var(--accent-teal);
+            padding-left: 8px;
+        }
+        
+        .expertise-list li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Certifications */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .cert-badge {
+            background: white;
+            padding: 30px;
+            border-radius: 4px;
+            text-align: center;
+            border: 1px solid var(--light-gray);
+            transition: border-color 0.3s ease;
+        }
+        
+        .cert-badge:hover {
+            border-color: var(--accent-teal);
+        }
+        
+        .cert-icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+        
+        .cert-name {
+            font-weight: 500;
+            font-size: 15px;
+            color: var(--charcoal);
+            margin-bottom: 5px;
+        }
+        
+        .cert-org {
+            font-size: 13px;
+            color: var(--mid-gray);
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 100px 60px;
+            text-align: center;
+        }
+        
+        .contact-section .section-title {
+            color: var(--cream);
+            margin: 0 auto 40px;
+        }
+        
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+        
+        .contact-link {
+            display: inline-block;
+            padding: 18px 40px;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+        
+        .contact-link:hover {
+            background: var(--accent-teal);
+            border-color: var(--accent-teal);
+            transform: translateY(-2px);
+        }
+        
+        .contact-link.primary {
+            background: var(--accent-teal);
+            border-color: var(--accent-teal);
+        }
+        
+        .contact-link.primary:hover {
+            background: transparent;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            color: rgba(255,255,255,0.5);
+            padding: 40px 60px;
+            text-align: center;
+            font-size: 13px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero {
+                padding: 60px 40px;
+            }
+            
+            section {
+                padding: 80px 40px;
+            }
+            
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .expertise-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .timeline {
+                padding-left: 40px;
+            }
+            
+            .timeline-item::before {
+                left: -46px;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .hero {
+                padding: 40px 24px;
+                min-height: auto;
+            }
+            
+            section {
+                padding: 60px 24px;
+            }
+            
+            h1 {
+                font-size: 42px;
+            }
+            
+            .hero-subtitle {
+                font-size: 18px;
+            }
+            
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .accomplishments-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-links {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="eyebrow">Portfolio · Data & AI Leadership</div>
+            <h1>Gautam Verma<br><span class="accent">Catalyst for Intelligent Transformation</span></h1>
+            <p class="hero-subtitle">
+                15 years architecting the human foundation that makes Data & AI work—from oil fields to government ministries, 
+                building cultures where technology thrives and adoption becomes inevitable.
+            </p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">20,000+</span>
+                    <span class="stat-label">Employees Enabled</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">150+</span>
+                    <span class="stat-label">Data Leaders Coached</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">200+</span>
+                    <span class="stat-label">Training Programs Delivered</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">30%</span>
+                    <span class="stat-label">Failure Rate Reduction</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Accomplishments -->
+    <section>
+        <div class="section-header">
+            <div class="section-label">Impact</div>
+            <h2 class="section-title">Where transformation meets reality</h2>
+        </div>
+        <div class="accomplishments-grid">
+            <div class="accomplishment-card">
+                <div class="accomplishment-number">01</div>
+                <p class="accomplishment-text">
+                    Led Data & Analytics Enablement for 20,000 employees across GCC Group, building the culture 
+                    and capability layer that technology vendors consistently leave unaddressed.
+                </p>
+            </div>
+            <div class="accomplishment-card">
+                <div class="accomplishment-number">02</div>
+                <p class="accomplishment-text">
+                    Built Equipment Condition Monitoring solution predicting Remaining Useful Life (RUL) of critical 
+                    fracking pumps using sensor data—reducing failure rates by 30%.
+                </p>
+            </div>
+            <div class="accomplishment-card">
+                <div class="accomplishment-number">03</div>
+                <p class="accomplishment-text">
+                    Achieved 80% success rate executing CDMP Data Management Certification for 150+ Data Executives, 
+                    establishing GCC's first cross-government data leadership cohort.
+                </p>
+            </div>
+            <div class="accomplishment-card">
+                <div class="accomplishment-number">04</div>
+                <p class="accomplishment-text">
+                    Delivered 200+ training programs for business and data practitioners across hierarchies, 
+                    focusing on value realization and storytelling over technical theater.
+                </p>
+            </div>
+            <div class="accomplishment-card">
+                <div class="accomplishment-number">05</div>
+                <p class="accomplishment-text">
+                    Developed region's first organization-wide Data Enablement Accelerator covering 10 data management 
+                    disciplines with frameworks now adopted government-wide.
+                </p>
+            </div>
+            <div class="accomplishment-card">
+                <div class="accomplishment-number">06</div>
+                <p class="accomplishment-text">
+                    Activated data offices for 30+ Abu Dhabi Government entities through centralized frameworks, 
+                    toolkits, and the Data In A Box platform serving governance, cataloging, and analytics.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Timeline -->
+    <section>
+        <div class="section-header">
+            <div class="section-label">Experience</div>
+            <h2 class="section-title">Journey through complexity</h2>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">2023 – Present</div>
+                <h3 class="timeline-title">Head of Data Enablement</h3>
+                <div class="timeline-org">Department of Government Enablement, Abu Dhabi</div>
+                <div class="timeline-description">
+                    Leading Data Enablement across 30+ government entities in service of AI Native Government and Digital Strategy 2027. 
+                    Driving data governance, quality frameworks, technology stack deployment, and culture transformation through 
+                    integrated communications and literacy initiatives in collaboration with CDOs.
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">2019 – 2023</div>
+                <h3 class="timeline-title">Head of Technology — Data & AI</h3>
+                <div class="timeline-org">NobleProg</div>
+                <div class="timeline-description">
+                    Developed and activated 10+ data strategies for government and semi-government clients across UAE and Saudi Arabia. 
+                    Built region's first organization-wide Data Enablement Accelerator covering 10 data management disciplines. 
+                    Led multi-million dollar people transformation programs across GCC.
+                    <ul>
+                        <li>Lead Consultant (Majid Al Futtaim): Drove Data & AI adoption for 5,000+ employees across Carrefour, VOX, Lifestyle, Malls, and Real Estate holdings</li>
+                        <li>Lead Consultant (Abu Dhabi Digital Authority): Delivered region's first cross-government Data Leadership program for 160+ executives</li>
+                        <li>Lead Consultant (Emirates Global Aluminium): Built Data Academy reaching 300 employees across mining, refining, and smelting operations</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">2016 – 2019</div>
+                <h3 class="timeline-title">Lead Consultant — Data & AI</h3>
+                <div class="timeline-org">Forum Energy Technologies (Client via Cyient)</div>
+                <div class="timeline-description">
+                    Led multi-million dollar Condition Based Monitoring project for US energy OEM as Lead Translator. 
+                    Built Remaining Useful Life (RUL) prediction solution using ML algorithms to forecast asset health. 
+                    Optimized site operations implementing edge, fog, and cloud architecture—shifting from reactive to predictive maintenance.
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">2016 – 2019</div>
+                <h3 class="timeline-title">Analytics Solutions Specialist</h3>
+                <div class="timeline-org">Cyient</div>
+                <div class="timeline-description">
+                    Partnered with Microsoft to build cloud-based ML and AI solutions for industrial use cases. 
+                    Developed and delivered cloud-based AI solutions around M2M and sensor telemetry data, 
+                    solving business problems like predictive maintenance at scale.
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">2014 – 2015</div>
+                <h3 class="timeline-title">Associate Consultant</h3>
+                <div class="timeline-org">KPMG</div>
+                <div class="timeline-description">
+                    Led program management for projects involving assurance reviews and process benchmarking. 
+                    Worked with IBM SPSS on industry client data for RFM analysis, pricing analysis, and web analytics—bridging 
+                    strategy teams and technical delivery.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise -->
+    <section style="background: white;">
+        <div class="section-header">
+            <div class="section-label">Capabilities</div>
+            <h2 class="section-title">Depth across the transformation stack</h2>
+        </div>
+        <div class="expertise-grid">
+            <div class="expertise-category">
+                <h3>Strategic</h3>
+                <ul class="expertise-list">
+                    <li>Data & AI Strategy Development</li>
+                    <li>Change Management & Adoption</li>
+                    <li>Executive Coaching</li>
+                    <li>Stakeholder Management</li>
+                    <li>Organizational Design</li>
+                    <li>Program Leadership</li>
+                </ul>
+            </div>
+            <div class="expertise-category">
+                <h3>Technical</h3>
+                <ul class="expertise-list">
+                    <li>Generative AI & LLMs</li>
+                    <li>Machine Learning & Data Science</li>
+                    <li>Prompt Engineering</li>
+                    <li>Responsible AI Frameworks</li>
+                    <li>Python, SQL, R</li>
+                    <li>Cloud Analytics (Azure, AWS)</li>
+                </ul>
+            </div>
+            <div class="expertise-category">
+                <h3>Governance & Quality</h3>
+                <ul class="expertise-list">
+                    <li>Data Governance Frameworks</li>
+                    <li>Data Quality Management</li>
+                    <li>Master Data Management</li>
+                    <li>Data Cataloging & Metadata</li>
+                    <li>Data Architecture</li>
+                    <li>Policy & Standards Development</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section>
+        <div class="section-header">
+            <div class="section-label">Credentials</div>
+            <h2 class="section-title">Certified mastery</h2>
+        </div>
+        <div class="cert-grid">
+            <div class="cert-badge">
+                <div class="cert-icon">🎓</div>
+                <div class="cert-name">CDMP Master</div>
+                <div class="cert-org">DAMA International</div>
+            </div>
+            <div class="cert-badge">
+                <div class="cert-icon">🔄</div>
+                <div class="cert-name">Change Practitioner</div>
+                <div class="cert-org">APMG International</div>
+            </div>
+            <div class="cert-badge">
+                <div class="cert-icon">🤖</div>
+                <div class="cert-name">AI Engineer</div>
+                <div class="cert-org">Microsoft Certified</div>
+            </div>
+            <div class="cert-badge">
+                <div class="cert-icon">💾</div>
+                <div class="cert-name">Data Management</div>
+                <div class="cert-org">Informatica Certified</div>
+            </div>
+            <div class="cert-badge">
+                <div class="cert-icon">📊</div>
+                <div class="cert-name">MBA in Analytics</div>
+                <div class="cert-org">Great Lakes Institute</div>
+            </div>
+            <div class="cert-badge">
+                <div class="cert-icon">⚡</div>
+                <div class="cert-name">M.Sc. Electronics</div>
+                <div class="cert-org">University of Manchester</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <h2 class="section-title">Let's build something that actually works</h2>
+        <div class="contact-links">
+            <a href="mailto:gautam.tverma@gmail.com" class="contact-link primary">Email Me</a>
+            <a href="https://linkedin.com/in/gautamtverma" target="_blank" class="contact-link">LinkedIn</a>
+            <a href="tel:+971552477641" class="contact-link">+971 552 47 76 41</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Gautam Verma · Dubai, UAE · Golden Visa Holder</p>
+    </footer>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            if (!section.classList.contains('hero')) {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(section);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -7,7 +7,6 @@
     <meta name="keywords" content="Data & AI, Chief Data Officer, Data Governance, AI Strategy, GCC, UAE, Abu Dhabi">
     <title>Gautam Verma — Data & AI Catalyst</title>
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -22,11 +21,7 @@
             --light-gray: #E8E4DC;
         }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'Inter', sans-serif;
@@ -36,7 +31,7 @@
             overflow-x: hidden;
         }
         
-        /* Hero Section */
+        /* Hero */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -49,10 +44,8 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            right: 0;
-            width: 600px;
-            height: 600px;
+            top: 0; right: 0;
+            width: 600px; height: 600px;
             background: radial-gradient(circle, rgba(46,196,182,0.08) 0%, transparent 70%);
             border-radius: 50%;
             animation: float 20s ease-in-out infinite;
@@ -74,14 +67,11 @@
             align-items: center;
         }
         
-        .hero-text {
-            grid-column: 1;
-        }
+        .hero-text { grid-column: 1; }
         
         .profile-image {
             grid-column: 2;
-            width: 300px;
-            height: 300px;
+            width: 300px; height: 300px;
             border-radius: 4px;
             object-fit: cover;
             box-shadow: 0 20px 60px rgba(0,0,0,0.15);
@@ -174,9 +164,7 @@
             margin: 0 auto;
         }
         
-        .section-header {
-            margin-bottom: 80px;
-        }
+        .section-header { margin-bottom: 60px; }
         
         .section-label {
             font-size: 13px;
@@ -194,50 +182,118 @@
             line-height: 1.2;
             max-width: 800px;
         }
-        
-        /* Photo Gallery */
-        .photo-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
+
+        /* ─── CAROUSEL ─── */
+        .carousel-section {
+            background: white;
+            padding: 120px 0;
         }
-        
-        .photo-item {
-            position: relative;
+
+        .carousel-section .section-header {
+            padding: 0 60px;
+        }
+
+        .carousel-track-wrapper {
             overflow: hidden;
-            border-radius: 4px;
-            aspect-ratio: 4/3;
+            width: 100%;
+            position: relative;
+            cursor: grab;
+        }
+
+        .carousel-track-wrapper::before,
+        .carousel-track-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 80px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .carousel-track-wrapper::before {
+            left: 0;
+            background: linear-gradient(to right, white, transparent);
+        }
+
+        .carousel-track-wrapper::after {
+            right: 0;
+            background: linear-gradient(to left, white, transparent);
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 24px;
+            width: max-content;
+            animation: carouselScroll 40s linear infinite;
+            padding: 8px 0;
+        }
+
+        .carousel-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes carouselScroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .carousel-slide {
+            flex-shrink: 0;
+            width: 380px;
+            height: 280px;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
             background: var(--light-gray);
         }
-        
-        .photo-item img {
+
+        .carousel-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.4s ease;
+            display: block;
+            transition: transform 0.5s ease;
         }
-        
-        .photo-item:hover img {
-            transform: scale(1.05);
+
+        .carousel-slide:hover img {
+            transform: scale(1.04);
         }
-        
-        .photo-caption {
+
+        .carousel-slide .slide-caption {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(to top, rgba(26,26,26,0.85) 0%, transparent 100%);
             color: white;
-            padding: 40px 20px 20px;
-            font-size: 14px;
+            font-size: 13px;
+            font-weight: 400;
+            padding: 40px 20px 18px;
+            letter-spacing: 0.3px;
             transform: translateY(100%);
             transition: transform 0.3s ease;
         }
-        
-        .photo-item:hover .photo-caption {
+
+        .carousel-slide:hover .slide-caption {
             transform: translateY(0);
         }
+
+        /* Placeholder slide for missing images */
+        .carousel-slide.placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 12px;
+            background: linear-gradient(135deg, #F0EDE6, #E8E4DC);
+        }
+
+        .carousel-slide.placeholder span {
+            font-size: 13px;
+            color: var(--mid-gray);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ─── END CAROUSEL ─── */
         
         /* Timeline */
         .timeline {
@@ -248,9 +304,7 @@
         .timeline::before {
             content: '';
             position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
+            left: 0; top: 0; bottom: 0;
             width: 1px;
             background: linear-gradient(to bottom, var(--accent-teal), transparent);
         }
@@ -276,53 +330,28 @@
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: -66px;
-            top: 8px;
-            width: 12px;
-            height: 12px;
+            left: -66px; top: 8px;
+            width: 12px; height: 12px;
             background: var(--accent-teal);
             border-radius: 50%;
             box-shadow: 0 0 0 4px var(--cream);
         }
         
-        .timeline-date {
-            font-size: 14px;
-            color: var(--mid-gray);
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
+        .timeline-date { font-size: 14px; color: var(--mid-gray); margin-bottom: 8px; font-weight: 500; }
         
         .timeline-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 28px;
-            font-weight: 500;
-            margin-bottom: 8px;
-            color: var(--charcoal);
+            font-size: 28px; font-weight: 500;
+            margin-bottom: 8px; color: var(--charcoal);
         }
         
-        .timeline-org {
-            font-size: 16px;
-            color: var(--accent-teal);
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
+        .timeline-org { font-size: 16px; color: var(--accent-teal); margin-bottom: 15px; font-weight: 500; }
         
-        .timeline-description {
-            color: var(--mid-gray);
-            line-height: 1.8;
-            max-width: 700px;
-        }
+        .timeline-description { color: var(--mid-gray); line-height: 1.8; max-width: 700px; }
+        .timeline-description ul { margin-top: 15px; padding-left: 20px; }
+        .timeline-description li { margin-bottom: 8px; }
         
-        .timeline-description ul {
-            margin-top: 15px;
-            padding-left: 20px;
-        }
-        
-        .timeline-description li {
-            margin-bottom: 8px;
-        }
-        
-        /* Accomplishments Grid */
+        /* Accomplishments */
         .accomplishments-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -345,94 +374,57 @@
         
         .accomplishment-number {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 18px;
-            color: var(--accent-warm);
-            margin-bottom: 15px;
-            font-weight: 600;
+            font-size: 18px; color: var(--accent-warm);
+            margin-bottom: 15px; font-weight: 600;
         }
         
-        .accomplishment-text {
-            font-size: 16px;
-            line-height: 1.7;
-            color: var(--charcoal);
-        }
+        .accomplishment-text { font-size: 16px; line-height: 1.7; color: var(--charcoal); }
         
-        /* Expertise Section */
+        /* Expertise */
         .expertise-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 60px;
-            margin-top: 60px;
+            gap: 60px; margin-top: 60px;
         }
         
         .expertise-category h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: var(--charcoal);
-            font-weight: 500;
+            font-size: 24px; margin-bottom: 20px;
+            color: var(--charcoal); font-weight: 500;
         }
         
-        .expertise-list {
-            list-style: none;
-        }
+        .expertise-list { list-style: none; }
         
         .expertise-list li {
             padding: 12px 0;
             border-bottom: 1px solid var(--light-gray);
-            color: var(--mid-gray);
-            font-size: 15px;
+            color: var(--mid-gray); font-size: 15px;
             transition: color 0.2s ease, padding-left 0.2s ease;
         }
         
-        .expertise-list li:hover {
-            color: var(--accent-teal);
-            padding-left: 8px;
-        }
-        
-        .expertise-list li:last-child {
-            border-bottom: none;
-        }
+        .expertise-list li:hover { color: var(--accent-teal); padding-left: 8px; }
+        .expertise-list li:last-child { border-bottom: none; }
         
         /* Certifications */
         .cert-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
+            gap: 30px; margin-top: 60px;
         }
         
         .cert-badge {
-            background: white;
-            padding: 30px;
-            border-radius: 4px;
-            text-align: center;
+            background: white; padding: 30px;
+            border-radius: 4px; text-align: center;
             border: 1px solid var(--light-gray);
             transition: border-color 0.3s ease;
         }
         
-        .cert-badge:hover {
-            border-color: var(--accent-teal);
-        }
+        .cert-badge:hover { border-color: var(--accent-teal); }
+        .cert-icon { font-size: 36px; margin-bottom: 15px; }
+        .cert-name { font-weight: 500; font-size: 15px; color: var(--charcoal); margin-bottom: 5px; }
+        .cert-org { font-size: 13px; color: var(--mid-gray); }
         
-        .cert-icon {
-            font-size: 36px;
-            margin-bottom: 15px;
-        }
-        
-        .cert-name {
-            font-weight: 500;
-            font-size: 15px;
-            color: var(--charcoal);
-            margin-bottom: 5px;
-        }
-        
-        .cert-org {
-            font-size: 13px;
-            color: var(--mid-gray);
-        }
-        
-        /* Contact Section */
+        /* Contact */
         .contact-section {
             background: var(--charcoal);
             color: var(--cream);
@@ -440,16 +432,12 @@
             text-align: center;
         }
         
-        .contact-section .section-title {
-            color: var(--cream);
-            margin: 0 auto 40px;
-        }
+        .contact-section .section-title { color: var(--cream); margin: 0 auto 40px; }
         
         .contact-links {
             display: flex;
             justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
+            gap: 40px; flex-wrap: wrap;
             margin-top: 50px;
         }
         
@@ -459,8 +447,7 @@
             border: 1px solid rgba(255,255,255,0.2);
             color: var(--cream);
             text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
+            font-size: 15px; font-weight: 500;
             letter-spacing: 1px;
             transition: all 0.3s ease;
             border-radius: 2px;
@@ -472,16 +459,9 @@
             transform: translateY(-2px);
         }
         
-        .contact-link.primary {
-            background: var(--accent-teal);
-            border-color: var(--accent-teal);
-        }
+        .contact-link.primary { background: var(--accent-teal); border-color: var(--accent-teal); }
+        .contact-link.primary:hover { background: transparent; }
         
-        .contact-link.primary:hover {
-            background: transparent;
-        }
-        
-        /* Footer */
         footer {
             background: var(--charcoal);
             color: rgba(255,255,255,0.5);
@@ -493,84 +473,36 @@
         
         /* Responsive */
         @media (max-width: 968px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            
-            .profile-image {
-                grid-column: 1;
-                width: 250px;
-                height: 250px;
-                margin: 0 auto;
-            }
-            
-            .hero {
-                padding: 60px 40px;
-            }
-            
-            section {
-                padding: 80px 40px;
-            }
-            
-            .hero-stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .expertise-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            
-            .timeline {
-                padding-left: 40px;
-            }
-            
-            .timeline-item::before {
-                left: -46px;
-            }
+            .hero-content { grid-template-columns: 1fr; gap: 40px; }
+            .profile-image { grid-column: 1; width: 250px; height: 250px; margin: 0 auto; }
+            .hero { padding: 60px 40px; }
+            section { padding: 80px 40px; }
+            .carousel-section { padding: 80px 0; }
+            .carousel-section .section-header { padding: 0 40px; }
+            .hero-stats { grid-template-columns: repeat(2, 1fr); }
+            .expertise-grid { grid-template-columns: 1fr; gap: 40px; }
+            .timeline { padding-left: 40px; }
+            .timeline-item::before { left: -46px; }
+            .carousel-slide { width: 300px; height: 220px; }
         }
         
         @media (max-width: 640px) {
-            .hero {
-                padding: 40px 24px;
-                min-height: auto;
-            }
-            
-            section {
-                padding: 60px 24px;
-            }
-            
-            h1 {
-                font-size: 42px;
-            }
-            
-            .hero-subtitle {
-                font-size: 18px;
-            }
-            
-            .hero-stats {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .accomplishments-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .contact-links {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .profile-image {
-                width: 200px;
-                height: 200px;
-            }
+            .hero { padding: 40px 24px; min-height: auto; }
+            section { padding: 60px 24px; }
+            .carousel-section { padding: 60px 0; }
+            .carousel-section .section-header { padding: 0 24px; }
+            h1 { font-size: 42px; }
+            .hero-subtitle { font-size: 18px; }
+            .hero-stats { grid-template-columns: 1fr; gap: 30px; }
+            .accomplishments-grid { grid-template-columns: 1fr; }
+            .contact-links { flex-direction: column; gap: 20px; }
+            .profile-image { width: 200px; height: 200px; }
+            .carousel-slide { width: 260px; height: 195px; }
         }
     </style>
 </head>
 <body>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
@@ -603,38 +535,130 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Profile Image - Replace with your actual photo -->
             <img src="images/profile.jpg" alt="Gautam Verma" class="profile-image" 
                  onerror="this.style.display='none'">
         </div>
     </section>
 
-    <!-- Speaking & Thought Leadership Gallery -->
-    <section style="background: white;">
+    <!-- Speaking & Community Engagement — Carousel -->
+    <div class="carousel-section">
         <div class="section-header">
             <div class="section-label">Thought Leadership</div>
             <h2 class="section-title">Speaking & community engagement</h2>
         </div>
-        <div class="photo-gallery">
-            <!-- Replace these with your actual images -->
-            <div class="photo-item">
-                <img src="images/speaking/event-1.jpg" alt="Data & AI Conference Europe" 
-                     onerror="this.src='https://via.placeholder.com/600x450/2EC4B6/ffffff?text=Speaking+Event+1'">
-                <div class="photo-caption">Data & AI Conference Europe · Keynote Speaker</div>
-            </div>
-            <div class="photo-item">
-                <img src="images/speaking/event-2.jpeg" alt="Government Data Summit" 
-                     onerror="this.src='https://via.placeholder.com/600x450/D4A574/ffffff?text=Speaking+Event+2'">
-                <div class="photo-caption">Government Data Summit · Executive Workshop</div>
-            </div>
-            <div class="photo-item">
-                <img src="images/speaking/event-3.jpg" alt="Data Conference Middle East" 
-                     onerror="this.src='https://via.placeholder.com/600x450/2EC4B6/ffffff?text=Training+Program'">
-                <div class="photo-caption">Data Conference Middle East · Keynote Speaker</div>
+
+        <div class="carousel-track-wrapper" id="carouselWrapper">
+            <div class="carousel-track" id="carouselTrack">
+                <!-- Slides — duplicated below for seamless loop -->
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-1.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">Data & AI Conference Europe · Keynote Speaker</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-2.jpeg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">Government Data Summit · Executive Workshop</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-3.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">Data Conference Middle East · Keynote Speaker</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-4.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">Abu Dhabi AI Forum · Panelist</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-5.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">GCC Data Leadership Summit · Workshop Facilitator</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-6.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">UAE AI Strategy Roundtable · Expert Speaker</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-7.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">Data Governance Forum · Featured Speaker</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-8.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">Enterprise AI Summit Dubai · Keynote</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-9.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">CDMP Executive Programme · Lead Trainer</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-10.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">Digital Transformation Congress · Speaker</div>
+                </div>
+
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-11.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">Your Event Name · Your Role</div>
+                </div>
+
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-12.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">Your Event Name · Your Role</div>
+                </div>
+
+                <!-- Duplicate set for seamless infinite loop -->
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-1.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">Data & AI Conference Europe · Keynote Speaker</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-2.jpeg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">Government Data Summit · Executive Workshop</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-3.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">Data Conference Middle East · Keynote Speaker</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-4.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">Abu Dhabi AI Forum · Panelist</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-5.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">GCC Data Leadership Summit · Workshop Facilitator</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-6.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">UAE AI Strategy Roundtable · Expert Speaker</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-7.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">Data Governance Forum · Featured Speaker</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-8.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">Enterprise AI Summit Dubai · Keynote</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-9.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">CDMP Executive Programme · Lead Trainer</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-10.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">Digital Transformation Congress · Speaker</div>
+                </div>
+                
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-11.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">Your Event Name · Your Role</div>
+                </div>
+
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/speaking/event-12.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
+                    <div class="slide-caption">Your Event Name · Your Role</div>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- Key Accomplishments -->
     <section>
@@ -645,45 +669,27 @@
         <div class="accomplishments-grid">
             <div class="accomplishment-card">
                 <div class="accomplishment-number">01</div>
-                <p class="accomplishment-text">
-                    Led Data & Analytics Enablement for 20,000 employees across GCC Group, building the culture 
-                    and capability layer that technology vendors consistently leave unaddressed.
-                </p>
+                <p class="accomplishment-text">Led Data & Analytics Enablement for 20,000 employees across GCC Group, building the culture and capability layer that technology vendors consistently leave unaddressed.</p>
             </div>
             <div class="accomplishment-card">
                 <div class="accomplishment-number">02</div>
-                <p class="accomplishment-text">
-                    Built Equipment Condition Monitoring solution predicting Remaining Useful Life (RUL) of critical 
-                    fracking pumps using sensor data—reducing failure rates by 30%.
-                </p>
+                <p class="accomplishment-text">Built Equipment Condition Monitoring solution predicting Remaining Useful Life (RUL) of critical fracking pumps using sensor data—reducing failure rates by 30%.</p>
             </div>
             <div class="accomplishment-card">
                 <div class="accomplishment-number">03</div>
-                <p class="accomplishment-text">
-                    Achieved 80% success rate executing CDMP Data Management Certification for 150+ Data Executives, 
-                    establishing GCC's first cross-government data leadership cohort.
-                </p>
+                <p class="accomplishment-text">Achieved 80% success rate executing CDMP Data Management Certification for 150+ Data Executives, establishing GCC's first cross-government data leadership cohort.</p>
             </div>
             <div class="accomplishment-card">
                 <div class="accomplishment-number">04</div>
-                <p class="accomplishment-text">
-                    Delivered 200+ training programs for business and data practitioners across hierarchies, 
-                    focusing on value realization and storytelling over technical theater.
-                </p>
+                <p class="accomplishment-text">Delivered 200+ training programs for business and data practitioners across hierarchies, focusing on value realization and storytelling over technical theater.</p>
             </div>
             <div class="accomplishment-card">
                 <div class="accomplishment-number">05</div>
-                <p class="accomplishment-text">
-                    Developed region's first organization-wide Data Enablement Accelerator covering 10 data management 
-                    disciplines with frameworks now adopted government-wide.
-                </p>
+                <p class="accomplishment-text">Developed region's first organization-wide Data Enablement Accelerator covering 10 data management disciplines with frameworks now adopted government-wide.</p>
             </div>
             <div class="accomplishment-card">
                 <div class="accomplishment-number">06</div>
-                <p class="accomplishment-text">
-                    Activated data offices for 30+ Abu Dhabi Government entities through centralized frameworks, 
-                    toolkits, and the Data In A Box platform serving governance, cataloging, and analytics.
-                </p>
+                <p class="accomplishment-text">Activated data offices for 30+ Abu Dhabi Government entities through centralized frameworks, toolkits, and the Data In A Box platform serving governance, cataloging, and analytics.</p>
             </div>
         </div>
     </section>
@@ -699,21 +705,14 @@
                 <div class="timeline-date">2023 – Present</div>
                 <h3 class="timeline-title">Head of Data Enablement</h3>
                 <div class="timeline-org">Department of Government Enablement, Abu Dhabi</div>
-                <div class="timeline-description">
-                    Leading Data Enablement across 30+ government entities in service of AI Native Government and Digital Strategy 2027. 
-                    Driving data governance, quality frameworks, technology stack deployment, and culture transformation through 
-                    integrated communications and literacy initiatives in collaboration with CDOs.
-                </div>
+                <div class="timeline-description">Leading Data Enablement across 30+ government entities in service of AI Native Government and Digital Strategy 2027. Driving data governance, quality frameworks, technology stack deployment, and culture transformation through integrated communications and literacy initiatives in collaboration with CDOs.</div>
             </div>
-            
             <div class="timeline-item">
                 <div class="timeline-date">2019 – 2023</div>
                 <h3 class="timeline-title">Head of Technology — Data & AI</h3>
                 <div class="timeline-org">NobleProg</div>
                 <div class="timeline-description">
-                    Developed and activated 10+ data strategies for government and semi-government clients across UAE and Saudi Arabia. 
-                    Built region's first organization-wide Data Enablement Accelerator covering 10 data management disciplines. 
-                    Led multi-million dollar people transformation programs across GCC.
+                    Developed and activated 10+ data strategies for government and semi-government clients across UAE and Saudi Arabia. Built region's first organization-wide Data Enablement Accelerator covering 10 data management disciplines. Led multi-million dollar people transformation programs across GCC.
                     <ul>
                         <li>Lead Consultant (Majid Al Futtaim): Drove Data & AI adoption for 5,000+ employees across Carrefour, VOX, Lifestyle, Malls, and Real Estate holdings</li>
                         <li>Lead Consultant (Abu Dhabi Digital Authority): Delivered region's first cross-government Data Leadership program for 160+ executives</li>
@@ -721,38 +720,23 @@
                     </ul>
                 </div>
             </div>
-            
             <div class="timeline-item">
                 <div class="timeline-date">2016 – 2019</div>
                 <h3 class="timeline-title">Lead Consultant — Data & AI</h3>
                 <div class="timeline-org">Forum Energy Technologies (Client via Cyient)</div>
-                <div class="timeline-description">
-                    Led multi-million dollar Condition Based Monitoring project for US energy OEM as Lead Translator. 
-                    Built Remaining Useful Life (RUL) prediction solution using ML algorithms to forecast asset health. 
-                    Optimized site operations implementing edge, fog, and cloud architecture—shifting from reactive to predictive maintenance.
-                </div>
+                <div class="timeline-description">Led multi-million dollar Condition Based Monitoring project for US energy OEM as Lead Translator. Built Remaining Useful Life (RUL) prediction solution using ML algorithms to forecast asset health. Optimized site operations implementing edge, fog, and cloud architecture—shifting from reactive to predictive maintenance.</div>
             </div>
-            
             <div class="timeline-item">
                 <div class="timeline-date">2016 – 2019</div>
                 <h3 class="timeline-title">Analytics Solutions Specialist</h3>
                 <div class="timeline-org">Cyient</div>
-                <div class="timeline-description">
-                    Partnered with Microsoft to build cloud-based ML and AI solutions for industrial use cases. 
-                    Developed and delivered cloud-based AI solutions around M2M and sensor telemetry data, 
-                    solving business problems like predictive maintenance at scale.
-                </div>
+                <div class="timeline-description">Partnered with Microsoft to build cloud-based ML and AI solutions for industrial use cases. Developed and delivered cloud-based AI solutions around M2M and sensor telemetry data, solving business problems like predictive maintenance at scale.</div>
             </div>
-            
             <div class="timeline-item">
                 <div class="timeline-date">2014 – 2015</div>
                 <h3 class="timeline-title">Associate Consultant</h3>
                 <div class="timeline-org">KPMG</div>
-                <div class="timeline-description">
-                    Led program management for projects involving assurance reviews and process benchmarking. 
-                    Worked with IBM SPSS on industry client data for RFM analysis, pricing analysis, and web analytics—bridging 
-                    strategy teams and technical delivery.
-                </div>
+                <div class="timeline-description">Led program management for projects involving assurance reviews and process benchmarking. Worked with IBM SPSS on industry client data for RFM analysis, pricing analysis, and web analytics—bridging strategy teams and technical delivery.</div>
             </div>
         </div>
     </section>
@@ -840,7 +824,7 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact -->
     <section class="contact-section">
         <h2 class="section-title">Let's build something that actually works</h2>
         <div class="contact-links">
@@ -855,12 +839,8 @@
     </footer>
 
     <script>
-        // Intersection Observer for scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
+        // Scroll animations
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -870,7 +850,6 @@
             });
         }, observerOptions);
 
-        // Observe all sections
         document.querySelectorAll('section').forEach(section => {
             if (!section.classList.contains('hero')) {
                 section.style.opacity = '0';
@@ -878,6 +857,31 @@
                 section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
                 observer.observe(section);
             }
+        });
+
+        // Carousel drag-to-scroll (desktop)
+        const wrapper = document.getElementById('carouselWrapper');
+        const track = document.getElementById('carouselTrack');
+        let isDown = false, startX, scrollLeft, dragOffset = 0;
+
+        wrapper.addEventListener('mousedown', (e) => {
+            isDown = true;
+            wrapper.style.cursor = 'grabbing';
+            startX = e.pageX;
+            dragOffset = 0;
+            track.style.animationPlayState = 'paused';
+        });
+
+        wrapper.addEventListener('mouseleave', () => {
+            isDown = false;
+            wrapper.style.cursor = 'grab';
+            track.style.animationPlayState = 'running';
+        });
+
+        wrapper.addEventListener('mouseup', () => {
+            isDown = false;
+            wrapper.style.cursor = 'grab';
+            track.style.animationPlayState = 'running';
         });
     </script>
 </body>

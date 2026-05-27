@@ -48,10 +48,10 @@
             width: 600px; height: 600px;
             background: radial-gradient(circle, rgba(46,196,182,0.08) 0%, transparent 70%);
             border-radius: 50%;
-            animation: float 20s ease-in-out infinite;
+            animation: floatOrb 20s ease-in-out infinite;
         }
         
-        @keyframes float {
+        @keyframes floatOrb {
             0%, 100% { transform: translate(0, 0) scale(1); }
             50% { transform: translate(-30px, -30px) scale(1.05); }
         }
@@ -157,7 +157,7 @@
             font-weight: 400;
         }
         
-        /* Section Styling */
+        /* Sections */
         section {
             padding: 120px 60px;
             max-width: 1400px;
@@ -183,63 +183,53 @@
             max-width: 800px;
         }
 
-        /* ─── CAROUSEL ─── */
+        /* ── CAROUSEL ── */
         .carousel-section {
             background: white;
             padding: 120px 0;
+            overflow: hidden;
         }
 
         .carousel-section .section-header {
             padding: 0 60px;
+            margin-bottom: 60px;
         }
 
-        .carousel-track-wrapper {
+        .carousel-viewport {
             overflow: hidden;
             width: 100%;
             position: relative;
-            cursor: grab;
         }
 
-        .carousel-track-wrapper::before,
-        .carousel-track-wrapper::after {
+        .carousel-viewport::before,
+        .carousel-viewport::after {
             content: '';
             position: absolute;
             top: 0; bottom: 0;
-            width: 80px;
+            width: 100px;
             z-index: 2;
             pointer-events: none;
         }
 
-        .carousel-track-wrapper::before {
+        .carousel-viewport::before {
             left: 0;
-            background: linear-gradient(to right, white, transparent);
+            background: linear-gradient(to right, white 0%, transparent 100%);
         }
 
-        .carousel-track-wrapper::after {
+        .carousel-viewport::after {
             right: 0;
-            background: linear-gradient(to left, white, transparent);
+            background: linear-gradient(to left, white 0%, transparent 100%);
         }
 
         .carousel-track {
             display: flex;
             gap: 24px;
-            width: max-content;
-            animation: carouselScroll 40s linear infinite;
+            will-change: transform;
             padding: 8px 0;
         }
 
-        .carousel-track:hover {
-            animation-play-state: paused;
-        }
-
-        @keyframes carouselScroll {
-            0%   { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
         .carousel-slide {
-            flex-shrink: 0;
-            width: 380px;
+            flex: 0 0 380px;
             height: 280px;
             border-radius: 6px;
             overflow: hidden;
@@ -259,7 +249,7 @@
             transform: scale(1.04);
         }
 
-        .carousel-slide .slide-caption {
+        .slide-caption {
             position: absolute;
             bottom: 0; left: 0; right: 0;
             background: linear-gradient(to top, rgba(26,26,26,0.85) 0%, transparent 100%);
@@ -268,33 +258,28 @@
             font-weight: 400;
             padding: 40px 20px 18px;
             letter-spacing: 0.3px;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .carousel-slide:hover .slide-caption {
-            transform: translateY(0);
+            opacity: 1;
         }
 
-        /* Placeholder slide for missing images */
-        .carousel-slide.placeholder {
+        .slide-placeholder {
+            width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
-            gap: 12px;
             background: linear-gradient(135deg, #F0EDE6, #E8E4DC);
-        }
-
-        .carousel-slide.placeholder span {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--mid-gray);
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             text-transform: uppercase;
         }
+        /* ── END CAROUSEL ── */
 
-        /* ─── END CAROUSEL ─── */
-        
         /* Timeline */
         .timeline {
             position: relative;
@@ -483,7 +468,7 @@
             .expertise-grid { grid-template-columns: 1fr; gap: 40px; }
             .timeline { padding-left: 40px; }
             .timeline-item::before { left: -46px; }
-            .carousel-slide { width: 300px; height: 220px; }
+            .carousel-slide { flex: 0 0 300px; height: 220px; }
         }
         
         @media (max-width: 640px) {
@@ -497,13 +482,13 @@
             .accomplishments-grid { grid-template-columns: 1fr; }
             .contact-links { flex-direction: column; gap: 20px; }
             .profile-image { width: 200px; height: 200px; }
-            .carousel-slide { width: 260px; height: 195px; }
+            .carousel-slide { flex: 0 0 260px; height: 195px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero">
         <div class="hero-content">
             <div class="hero-text">
@@ -546,117 +531,8 @@
             <div class="section-label">Thought Leadership</div>
             <h2 class="section-title">Speaking & community engagement</h2>
         </div>
-
-        <div class="carousel-track-wrapper" id="carouselWrapper">
-            <div class="carousel-track" id="carouselTrack">
-                <!-- Slides — duplicated below for seamless loop -->
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-1.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">Data & AI Conference Europe · Keynote Speaker</div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-2.jpeg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">Government Data Summit · Executive Workshop</div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-3.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">Data Conference Middle East · Keynote Speaker</div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-4.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">Abu Dhabi AI Forum · Panelist</div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-5.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">GCC Data Leadership Summit · Workshop Facilitator</div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-6.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">UAE AI Strategy Roundtable · Expert Speaker</div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-7.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">Data Governance Forum · Featured Speaker</div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-8.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">Enterprise AI Summit Dubai · Keynote</div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-9.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">CDMP Executive Programme · Lead Trainer</div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-10.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">Digital Transformation Congress · Speaker</div>
-                </div>
-
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-11.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">Your Event Name · Your Role</div>
-                </div>
-
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-12.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">Your Event Name · Your Role</div>
-                </div>
-
-                <!-- Duplicate set for seamless infinite loop -->
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-1.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">Data & AI Conference Europe · Keynote Speaker</div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-2.jpeg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">Government Data Summit · Executive Workshop</div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-3.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">Data Conference Middle East · Keynote Speaker</div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-4.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">Abu Dhabi AI Forum · Panelist</div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-5.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">GCC Data Leadership Summit · Workshop Facilitator</div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-6.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">UAE AI Strategy Roundtable · Expert Speaker</div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-7.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">Data Governance Forum · Featured Speaker</div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-8.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">Enterprise AI Summit Dubai · Keynote</div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-9.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">CDMP Executive Programme · Lead Trainer</div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-10.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">Digital Transformation Congress · Speaker</div>
-                </div>
-                
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-11.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">Your Event Name · Your Role</div>
-                </div>
-
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/speaking/event-12.jpg" alt="Speaking event" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML+='<span>Event Photo</span>'">
-                    <div class="slide-caption">Your Event Name · Your Role</div>
-                </div>
-            </div>
+        <div class="carousel-viewport">
+            <div class="carousel-track" id="carouselTrack"></div>
         </div>
     </div>
 
@@ -839,8 +715,82 @@
     </footer>
 
     <script>
-        // Scroll animations
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
+        // ── CAROUSEL ──
+        // Define slides here. Add as many as you want.
+        // For missing images, a styled placeholder renders automatically — no broken img tags.
+        const slides = [
+            { src: 'images/speaking/event-1.jpg',  caption: 'Data & AI Conference Europe · Keynote Speaker' },
+            { src: 'images/speaking/event-2.jpeg', caption: 'Government Data Summit · Executive Workshop' },
+            { src: 'images/speaking/event-3.jpg',  caption: 'Data Conference Middle East · Keynote Speaker' },
+            { src: 'images/speaking/event-4.jpg',  caption: 'Abu Dhabi AI Forum · Panelist' },
+            { src: 'images/speaking/event-5.jpg',  caption: 'GCC Data Leadership Summit · Workshop Facilitator' },
+            { src: 'images/speaking/event-6.jpg',  caption: 'UAE AI Strategy Roundtable · Expert Speaker' },
+            { src: 'images/speaking/event-7.jpg',  caption: 'Data Governance Forum · Featured Speaker' },
+            { src: 'images/speaking/event-8.jpg',  caption: 'Enterprise AI Summit Dubai · Keynote' },
+            { src: 'images/speaking/event-9.jpg',  caption: 'CDMP Executive Programme · Lead Trainer' },
+            { src: 'images/speaking/event-10.jpg', caption: 'Digital Transformation Congress · Speaker' },
+        ];
+
+        const SLIDE_WIDTH = 380;
+        const GAP = 24;
+        const SPEED = 0.6; // px per frame — increase to scroll faster
+
+        const track = document.getElementById('carouselTrack');
+        let offset = 0;
+        let paused = false;
+        let singleSetWidth = 0;
+
+        function buildSlide(item) {
+            const slide = document.createElement('div');
+            slide.className = 'carousel-slide';
+
+            const img = new Image();
+            img.alt = item.caption;
+
+            img.onload = function() {
+                slide.appendChild(img);
+                const cap = document.createElement('div');
+                cap.className = 'slide-caption';
+                cap.textContent = item.caption;
+                slide.appendChild(cap);
+            };
+
+            img.onerror = function() {
+                const ph = document.createElement('div');
+                ph.className = 'slide-placeholder';
+                ph.textContent = 'Photo coming soon';
+                slide.appendChild(ph);
+            };
+
+            img.src = item.src;
+            return slide;
+        }
+
+        // Build two full sets for seamless looping
+        [...slides, ...slides].forEach(item => {
+            track.appendChild(buildSlide(item));
+        });
+
+        singleSetWidth = slides.length * (SLIDE_WIDTH + GAP);
+
+        // Pause on hover
+        track.addEventListener('mouseenter', () => paused = true);
+        track.addEventListener('mouseleave', () => paused = false);
+
+        function animate() {
+            if (!paused) {
+                offset += SPEED;
+                if (offset >= singleSetWidth) {
+                    offset = 0;
+                }
+                track.style.transform = `translateX(-${offset}px)`;
+            }
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // ── SCROLL ANIMATIONS ──
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -848,7 +798,7 @@
                     entry.target.style.transform = 'translateY(0)';
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
 
         document.querySelectorAll('section').forEach(section => {
             if (!section.classList.contains('hero')) {
@@ -857,31 +807,6 @@
                 section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
                 observer.observe(section);
             }
-        });
-
-        // Carousel drag-to-scroll (desktop)
-        const wrapper = document.getElementById('carouselWrapper');
-        const track = document.getElementById('carouselTrack');
-        let isDown = false, startX, scrollLeft, dragOffset = 0;
-
-        wrapper.addEventListener('mousedown', (e) => {
-            isDown = true;
-            wrapper.style.cursor = 'grabbing';
-            startX = e.pageX;
-            dragOffset = 0;
-            track.style.animationPlayState = 'paused';
-        });
-
-        wrapper.addEventListener('mouseleave', () => {
-            isDown = false;
-            wrapper.style.cursor = 'grab';
-            track.style.animationPlayState = 'running';
-        });
-
-        wrapper.addEventListener('mouseup', () => {
-            isDown = false;
-            wrapper.style.cursor = 'grab';
-            track.style.animationPlayState = 'running';
         });
     </script>
 </body>

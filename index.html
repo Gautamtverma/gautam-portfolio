@@ -6,7 +6,37 @@
     <meta name="description" content="Gautam Verma - Data & AI Enablement Leader with 15 years experience in government and enterprise transformation across GCC">
     <meta name="keywords" content="Data & AI, Chief Data Officer, Data Governance, AI Strategy, GCC, UAE, Abu Dhabi">
     <title>Gautam Verma — Data & AI Catalyst</title>
-    
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Social sharing preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Gautam Verma — Data & AI Enablement Leader">
+    <meta property="og:description" content="15 years enabling Data & AI adoption across GCC governments and global enterprises. Head of Data Enablement, Department of Government Enablement, Abu Dhabi.">
+    <meta property="og:image" content="https://gautamtverma.github.io/gautam-portfolio/images/profile.jpg">
+    <meta property="og:url" content="https://gautamtverma.github.io/gautam-portfolio/">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Gautam Verma",
+        "jobTitle": "Head of Data Enablement",
+        "worksFor": { "@type": "Organization", "name": "Department of Government Enablement, Abu Dhabi" },
+        "address": { "@type": "PostalAddress", "addressLocality": "Dubai", "addressCountry": "AE" },
+        "email": "mailto:gautam.tverma@gmail.com",
+        "telephone": "+971552477641",
+        "url": "https://gautamtverma.github.io/gautam-portfolio/",
+        "image": "https://gautamtverma.github.io/gautam-portfolio/images/profile.jpg",
+        "sameAs": ["https://linkedin.com/in/gautamtverma"],
+        "alumniOf": [
+            { "@type": "CollegeOrUniversity", "name": "Great Lakes Institute of Management" },
+            { "@type": "CollegeOrUniversity", "name": "University of Manchester" }
+        ],
+        "knowsAbout": ["Data Governance", "AI Strategy", "Data Management", "Change Management", "Data Culture"]
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -182,6 +212,90 @@
             line-height: 1.2;
             max-width: 800px;
         }
+
+        /* ── LOGO MARQUEE ── */
+        .logo-section {
+            background: white;
+            padding: 60px 0;
+            border-top: 1px solid var(--light-gray);
+            border-bottom: 1px solid var(--light-gray);
+            overflow: hidden;
+        }
+
+        .logo-label {
+            text-align: center;
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--mid-gray);
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .logo-viewport {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .logo-viewport::before,
+        .logo-viewport::after {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 100px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .logo-viewport::before {
+            left: 0;
+            background: linear-gradient(to right, white 0%, transparent 100%);
+        }
+
+        .logo-viewport::after {
+            right: 0;
+            background: linear-gradient(to left, white 0%, transparent 100%);
+        }
+
+        .logo-track {
+            display: flex;
+            width: max-content;
+            animation: logoScroll 50s linear infinite;
+        }
+
+        .logo-track:hover { animation-play-state: paused; }
+
+        .logo-set {
+            display: flex;
+            align-items: center;
+            gap: 72px;
+            padding-right: 72px;
+        }
+
+        .logo-set img {
+            height: 46px;
+            width: auto;
+            max-width: 160px;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.6;
+            transition: filter 0.3s ease, opacity 0.3s ease;
+        }
+
+        .logo-set img:hover {
+            filter: none;
+            opacity: 1;
+        }
+
+        @keyframes logoScroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .logo-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
+        }
+        /* ── END LOGO MARQUEE ── */
 
         /* ── CAROUSEL ── */
         .carousel-section {
@@ -365,6 +479,52 @@
         
         .accomplishment-text { font-size: 16px; line-height: 1.7; color: var(--charcoal); }
         
+        /* Testimonials */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 50px 40px 40px;
+            border-radius: 4px;
+            border: 1px solid var(--light-gray);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '\201C';
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 90px;
+            line-height: 1;
+            color: var(--accent-teal);
+            position: absolute;
+            top: 18px; left: 32px;
+            opacity: 0.35;
+        }
+
+        .testimonial-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 21px;
+            font-style: italic;
+            line-height: 1.6;
+            color: var(--charcoal);
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author { border-top: 1px solid var(--light-gray); padding-top: 20px; }
+        .testimonial-name { font-weight: 600; font-size: 15px; color: var(--charcoal); }
+        .testimonial-role { font-size: 14px; color: var(--mid-gray); margin-top: 3px; }
+
+        @media (max-width: 640px) {
+            .testimonial-grid { grid-template-columns: 1fr; }
+        }
+
         /* Expertise */
         .expertise-grid {
             display: grid;
@@ -405,11 +565,37 @@
         }
         
         .cert-badge:hover { border-color: var(--accent-teal); }
-        .cert-icon { font-size: 36px; margin-bottom: 15px; }
+        .cert-icon { margin-bottom: 15px; height: 84px; display: flex; align-items: center; justify-content: center; }
+        .cert-icon img { max-height: 84px; max-width: 120px; object-fit: contain; }
+        .edu-mark {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic; font-weight: 500;
+            font-size: 38px; color: var(--accent-teal);
+            line-height: 1;
+        }
         .cert-name { font-weight: 500; font-size: 15px; color: var(--charcoal); margin-bottom: 5px; }
         .cert-org { font-size: 13px; color: var(--mid-gray); }
         
+        /* About */
+        .about-text {
+            max-width: 760px;
+            font-size: 19px;
+            line-height: 1.8;
+            font-weight: 300;
+            color: var(--charcoal);
+        }
+
+        .about-text p + p { margin-top: 24px; }
+
         /* Contact */
+        .contact-subtitle {
+            font-size: 17px;
+            font-weight: 300;
+            color: rgba(250,247,242,0.75);
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
         .contact-section {
             background: var(--charcoal);
             color: var(--cream);
@@ -503,12 +689,12 @@
                 </p>
                 <div class="hero-stats">
                     <div class="stat">
-                        <span class="stat-number">20,000+</span>
-                        <span class="stat-label">Employees Enabled</span>
+                        <span class="stat-number">160+</span>
+                        <span class="stat-label">Executives Coached</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-number">150+</span>
-                        <span class="stat-label">Data Leaders Coached</span>
+                        <span class="stat-number">1,500+</span>
+                        <span class="stat-label">Practitioners Enabled</span>
                     </div>
                     <div class="stat">
                         <span class="stat-number">200+</span>
@@ -522,6 +708,26 @@
             </div>
             <img src="images/profile.jpg" alt="Gautam Verma" class="profile-image" 
                  onerror="this.style.display='none'">
+        </div>
+    </section>
+
+    <!-- Clients & Employers — Logo Marquee -->
+    <div class="logo-section" aria-label="Clients and employers">
+        <div class="logo-label">Trusted by governments &amp; global enterprises</div>
+        <div class="logo-viewport">
+            <div class="logo-track" id="logoTrack"></div>
+        </div>
+    </div>
+
+    <!-- About -->
+    <section>
+        <div class="section-header">
+            <div class="section-label">Beyond the title</div>
+            <h2 class="section-title">The person behind the programs</h2>
+        </div>
+        <div class="about-text">
+            <p>I've spent fifteen years learning that data transformation doesn't happen on slides — it happens in rooms. Coaching a first-time Chief Data Officer through their opening hundred days, debating AI with university students, or walking a leadership team through why data quality is a people problem before it's a technology one: that's where I do my best work.</p>
+            <p>Outside the day job, you'll find me on stages and in community sessions across the MENA region — CodersHQ, Dubai Future Skills, the Data Innovation Summit — because I believe this region's data future is built by the people who show up for it. I first called the UAE home back in 2010, and after stints across India, the US and Australia, I've been back since 2019 — the pace here still feels like day one.</p>
         </div>
     </section>
 
@@ -553,7 +759,7 @@
             </div>
             <div class="accomplishment-card">
                 <div class="accomplishment-number">03</div>
-                <p class="accomplishment-text">Achieved 80% success rate executing CDMP Data Management Certification for 150+ Data Executives, establishing GCC's first cross-government data leadership cohort.</p>
+                <p class="accomplishment-text">Achieved 80% success rate executing CDMP Data Management Certification for 160+ Data Executives, establishing GCC's first cross-government data leadership cohort.</p>
             </div>
             <div class="accomplishment-card">
                 <div class="accomplishment-number">04</div>
@@ -617,6 +823,30 @@
         </div>
     </section>
 
+    <!-- Testimonials -->
+    <section>
+        <div class="section-header">
+            <div class="section-label">Voices</div>
+            <h2 class="section-title">What colleagues say</h2>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-quote">Gautam is a perfect bridge between the perception and reality of implementing projects. He is a true consultant who can identify the problem, lead sales, convince the business, bring home the project, assemble the team, and execute the job with perfection.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-name">Sesha Modukuru</div>
+                    <div class="testimonial-role">CEO, Dristia AI · ex-CEO, Cyient Insights</div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-quote">The first thing that comes to my mind with his name is enthusiasm — that is symbolic of him. He is a very lively, cheerful and passionate person who gives his cent percent to whatever he undertakes.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-name">Jitin Arora</div>
+                    <div class="testimonial-role">Senior Manager, Deloitte USA</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Expertise -->
     <section>
         <div class="section-header">
@@ -668,32 +898,32 @@
         </div>
         <div class="cert-grid">
             <div class="cert-badge">
-                <div class="cert-icon">🎓</div>
+                <div class="cert-icon"><img src="images/certs/cdmp-master.png" alt="CDMP Master badge"></div>
                 <div class="cert-name">CDMP Master</div>
                 <div class="cert-org">DAMA International</div>
             </div>
             <div class="cert-badge">
-                <div class="cert-icon">🔄</div>
-                <div class="cert-name">Change Practitioner</div>
+                <div class="cert-icon"><img src="images/certs/apmg-change-practitioner.png" alt="APMG Change Management Practitioner badge"></div>
+                <div class="cert-name">Change Management Practitioner</div>
                 <div class="cert-org">APMG International</div>
             </div>
             <div class="cert-badge">
-                <div class="cert-icon">🤖</div>
-                <div class="cert-name">AI Engineer</div>
-                <div class="cert-org">Microsoft Certified</div>
-            </div>
-            <div class="cert-badge">
-                <div class="cert-icon">💾</div>
-                <div class="cert-name">Data Management</div>
+                <div class="cert-icon"><img src="images/certs/informatica-idmc.png" alt="Informatica IDMC certification badge"></div>
+                <div class="cert-name">Intelligent Data Management Cloud</div>
                 <div class="cert-org">Informatica Certified</div>
             </div>
             <div class="cert-badge">
-                <div class="cert-icon">📊</div>
-                <div class="cert-name">MBA in Analytics</div>
-                <div class="cert-org">Great Lakes Institute</div>
+                <div class="cert-icon"><img src="images/certs/axelos-mop.png" alt="Axelos Management of Portfolios badge"></div>
+                <div class="cert-name">Management of Portfolios (MoP)</div>
+                <div class="cert-org">Axelos</div>
             </div>
             <div class="cert-badge">
-                <div class="cert-icon">⚡</div>
+                <div class="cert-icon"><span class="edu-mark">MBA</span></div>
+                <div class="cert-name">MBA in Analytics</div>
+                <div class="cert-org">Great Lakes Institute of Management</div>
+            </div>
+            <div class="cert-badge">
+                <div class="cert-icon"><span class="edu-mark">M.Sc.</span></div>
                 <div class="cert-name">M.Sc. Electronics</div>
                 <div class="cert-org">University of Manchester</div>
             </div>
@@ -703,10 +933,12 @@
     <!-- Contact -->
     <section class="contact-section">
         <h2 class="section-title">Let's build something that actually works</h2>
+        <p class="contact-subtitle">Whether it's a keynote, a data strategy question, or a coffee in Dubai — my inbox is open.</p>
         <div class="contact-links">
             <a href="mailto:gautam.tverma@gmail.com" class="contact-link primary">Email Me</a>
             <a href="https://linkedin.com/in/gautamtverma" target="_blank" class="contact-link">LinkedIn</a>
             <a href="tel:+971552477641" class="contact-link">+971 552 47 76 41</a>
+            <a href="Gautam_Verma_Profile.pdf" download class="contact-link">Download Profile</a>
         </div>
     </section>
 
@@ -715,22 +947,59 @@
     </footer>
 
     <script>
+        // ── LOGO MARQUEE ──
+        // Clients & employers from CV. Two identical sets render for a seamless loop.
+        const logos = [
+            { src: 'images/logos/dge.png',                          alt: 'Department of Government Enablement, Abu Dhabi' },
+            { src: 'images/logos/microsoft.png',                    alt: 'Microsoft' },
+            { src: 'images/logos/abu-dhabi-digital-authority.png',  alt: 'Abu Dhabi Digital Authority' },
+            { src: 'images/logos/kpmg.png',                         alt: 'KPMG' },
+            { src: 'images/logos/adnoc.png',                        alt: 'ADNOC' },
+            { src: 'images/logos/aws.png',                          alt: 'Amazon Web Services' },
+            { src: 'images/logos/majid-al-futtaim.png',             alt: 'Majid Al Futtaim' },
+            { src: 'images/logos/smart-dubai.png',                  alt: 'Smart Dubai' },
+            { src: 'images/logos/ega.png',                          alt: 'Emirates Global Aluminium' },
+            { src: 'images/logos/pwc-academy.png',                  alt: 'PwC Academy' },
+            { src: 'images/logos/difc-academy.png',                 alt: 'DIFC Academy' },
+            { src: 'images/logos/university-of-manchester.png',     alt: 'University of Manchester' },
+            { src: 'images/logos/codershq.png',                     alt: 'Coders HQ' },
+            { src: 'images/logos/forum-energy.png',                 alt: 'Forum Energy Technologies' },
+            { src: 'images/logos/cyient.png',                       alt: 'Cyient' },
+            { src: 'images/logos/nobleprog.png',                    alt: 'NobleProg' },
+        ];
+
+        const logoTrack = document.getElementById('logoTrack');
+        for (let set = 0; set < 2; set++) {
+            const setDiv = document.createElement('div');
+            setDiv.className = 'logo-set';
+            if (set === 1) setDiv.setAttribute('aria-hidden', 'true');
+            logos.forEach(l => {
+                const img = new Image();
+                img.src = l.src;
+                img.alt = l.alt;
+                img.title = l.alt;
+                img.onerror = function() { this.remove(); };
+                setDiv.appendChild(img);
+            });
+            logoTrack.appendChild(setDiv);
+        }
+
         // ── CAROUSEL ──
         // Define slides here. Add as many as you want.
         // For missing images, a styled placeholder renders automatically — no broken img tags.
         const slides = [
-            { src: 'images/speaking/event-1.jpg',  caption: 'Abu Dhabi Government Data Program · Executive Workshop' },
+            { src: 'images/speaking/event-1.jpg',  caption: 'Abu Dhabi Government Data Academy · Micro-credentials Program' },
             { src: 'images/speaking/event-2.jpeg', caption: 'Government Data Program · Executive Workshop' },
-            { src: 'images/speaking/event-3.jpg',  caption: 'Data Conference Middle East · Keynote Speaker' },
-            { src: 'images/speaking/event-4.jpg',  caption: 'Dubai Universities Hackathon · Keynote Speaker' },
-            { src: 'images/speaking/event-5.jpg',  caption: 'Data & AI Conference Europe · Case Study Presenter' },
+            { src: 'images/speaking/event-3.jpg',  caption: 'Data Innovation Summit MEA 2025, Dubai · Keynote Speaker' },
+            { src: 'images/speaking/event-4.jpg',  caption: 'Murdoch University Dubai · Guest Speaker Recognition' },
+            { src: 'images/speaking/event-5.jpg',  caption: 'Data Innovation Summit 2025 · Keynote Speaker' },
             { src: 'images/speaking/event-6.jpg',  caption: 'GCC Data Leadership Summit · Workshop Facilitator' },
             { src: 'images/speaking/event-7.jpg',  caption: 'UAE Data Summit · Keynote Speaker' },
-            { src: 'images/speaking/event-8.jpg',  caption: 'Dubai Universities Hackathon · Keynote Speaker' },
-            { src: 'images/speaking/event-9.jpg',  caption: 'Oman Enterprise Data Summit · Facilitator & Presenter' },
-            { src: 'images/speaking/event-10.jpg', caption: 'Dubai Data Summit · Keynote Speaker' },
+            { src: 'images/speaking/event-8.jpg',  caption: 'Murdoch University Dubai · Guest Lecture — Realizing Business Value from Data & AI' },
+            { src: 'images/speaking/event-9.jpg',  caption: 'Oxy Oman Innovation Program · Workshop Facilitator' },
+            { src: 'images/speaking/event-10.jpg', caption: 'Data 2030 Summit MEA, Dubai · Speaker' },
             { src: 'images/speaking/event-11.jpg', caption: 'Digital Transformation Congress · Panel Speaker' },
-            { src: 'images/speaking/event-12.jpg', caption: 'Data Management Executive Program- Abu Dhabi · Workshop Presenter' },
+            { src: 'images/speaking/event-12.jpg', caption: 'Data Management Executive Program, Abu Dhabi · Workshop Presenter' },
         ];
 
         const SLIDE_WIDTH = 380;

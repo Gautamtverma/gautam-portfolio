@@ -297,70 +297,16 @@
         }
         /* ── END LOGO MARQUEE ── */
 
-        /* ── CAROUSEL ── */
-        .carousel-section {
+        /* ── SPEAKING SECTION ── */
+        .speaking-section {
             background: white;
             padding: 120px 0;
             overflow: hidden;
         }
 
-        .carousel-section .section-header {
+        .speaking-section .section-header {
             padding: 0 60px;
             margin-bottom: 60px;
-        }
-
-        .carousel-viewport {
-            overflow: hidden;
-            width: 100%;
-            position: relative;
-        }
-
-        .carousel-viewport::before,
-        .carousel-viewport::after {
-            content: '';
-            position: absolute;
-            top: 0; bottom: 0;
-            width: 100px;
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        .carousel-viewport::before {
-            left: 0;
-            background: linear-gradient(to right, white 0%, transparent 100%);
-        }
-
-        .carousel-viewport::after {
-            right: 0;
-            background: linear-gradient(to left, white 0%, transparent 100%);
-        }
-
-        .carousel-track {
-            display: flex;
-            gap: 24px;
-            will-change: transform;
-            padding: 8px 0;
-        }
-
-        .carousel-slide {
-            flex: 0 0 380px;
-            height: 280px;
-            border-radius: 6px;
-            overflow: hidden;
-            position: relative;
-            background: var(--light-gray);
-        }
-
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .carousel-slide:hover img {
-            transform: scale(1.04);
         }
 
         .slide-caption {
@@ -376,23 +322,100 @@
             transition: opacity 0.3s ease;
         }
 
-        .carousel-slide:hover .slide-caption {
-            opacity: 1;
+        /* ── END SPEAKING SECTION ── */
+
+        /* ── PHOTO GALLERY ── */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
         }
 
-        .slide-placeholder {
+        .gallery-thumb {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            border: 0;
+            padding: 0;
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: zoom-in;
+            background: var(--light-gray);
+        }
+
+        .gallery-thumb img {
             width: 100%;
             height: 100%;
-            display: flex;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-thumb:hover img,
+        .gallery-thumb:focus-visible img { transform: scale(1.06); }
+
+        .gallery-thumb:focus-visible { outline: 2px solid var(--accent-teal); outline-offset: 3px; }
+
+        .gallery-thumb .slide-caption {
+            font-size: 12px;
+            padding: 28px 12px 10px;
+            text-align: left;
+        }
+
+        .gallery-thumb:hover .slide-caption,
+        .gallery-thumb:focus-visible .slide-caption { opacity: 1; }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(26,26,26,0.94);
+            display: none;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #F0EDE6, #E8E4DC);
-            font-size: 12px;
-            color: var(--mid-gray);
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            flex-direction: column;
+            padding: 40px 80px;
         }
-        /* ── END CAROUSEL ── */
+
+        .lightbox.open { display: flex; }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: calc(100vh - 140px);
+            border-radius: 4px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .lightbox-caption {
+            color: var(--cream);
+            font-size: 14px;
+            letter-spacing: 0.3px;
+            margin-top: 18px;
+            text-align: center;
+        }
+
+        .lightbox button {
+            position: absolute;
+            background: none;
+            border: 0;
+            color: var(--cream);
+            font-size: 36px;
+            line-height: 1;
+            padding: 12px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s ease, color 0.2s ease;
+        }
+
+        .lightbox button:hover,
+        .lightbox button:focus-visible { opacity: 1; color: var(--accent-teal); }
+
+        .lightbox-close { top: 16px; right: 20px; }
+        .lightbox-prev { left: 16px; top: 50%; transform: translateY(-50%); }
+        .lightbox-next { right: 16px; top: 50%; transform: translateY(-50%); }
+        /* ── END PHOTO GALLERY ── */
 
         /* Timeline */
         .timeline {
@@ -648,27 +671,30 @@
             .profile-image { grid-column: 1; width: 250px; height: 250px; margin: 0 auto; }
             .hero { padding: 60px 40px; }
             section { padding: 80px 40px; }
-            .carousel-section { padding: 80px 0; }
-            .carousel-section .section-header { padding: 0 40px; }
+            .speaking-section { padding: 80px 0; }
+            .speaking-section .section-header { padding: 0 40px; }
             .hero-stats { grid-template-columns: repeat(2, 1fr); }
             .expertise-grid { grid-template-columns: 1fr; gap: 40px; }
             .timeline { padding-left: 40px; }
             .timeline-item::before { left: -46px; }
-            .carousel-slide { flex: 0 0 300px; height: 220px; }
+            .gallery-grid { grid-template-columns: repeat(3, 1fr); padding: 0 40px; }
+            .lightbox { padding: 40px 56px; }
         }
         
         @media (max-width: 640px) {
             .hero { padding: 40px 24px; min-height: auto; }
             section { padding: 60px 24px; }
-            .carousel-section { padding: 60px 0; }
-            .carousel-section .section-header { padding: 0 24px; }
+            .speaking-section { padding: 60px 0; }
+            .speaking-section .section-header { padding: 0 24px; }
             h1 { font-size: 42px; }
             .hero-subtitle { font-size: 18px; }
             .hero-stats { grid-template-columns: 1fr; gap: 30px; }
             .accomplishments-grid { grid-template-columns: 1fr; }
             .contact-links { flex-direction: column; gap: 20px; }
             .profile-image { width: 200px; height: 200px; }
-            .carousel-slide { flex: 0 0 260px; height: 195px; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 0 24px; }
+            .lightbox { padding: 60px 12px; }
+            .lightbox-prev, .lightbox-next { top: auto; bottom: 12px; transform: none; }
         }
     </style>
 </head>
@@ -731,15 +757,21 @@
         </div>
     </section>
 
-    <!-- Speaking & Community Engagement — Carousel -->
-    <div class="carousel-section">
+    <!-- Speaking & Community Engagement — Photo Gallery -->
+    <div class="speaking-section">
         <div class="section-header">
             <div class="section-label">Thought Leadership</div>
             <h2 class="section-title">Speaking & community engagement</h2>
         </div>
-        <div class="carousel-viewport">
-            <div class="carousel-track" id="carouselTrack"></div>
-        </div>
+        <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+        <button class="lightbox-close" aria-label="Close">&times;</button>
+        <button class="lightbox-prev" aria-label="Previous photo">&#8249;</button>
+        <img id="lightboxImg" alt="">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+        <button class="lightbox-next" aria-label="Next photo">&#8250;</button>
     </div>
 
     <!-- Key Accomplishments -->
@@ -984,9 +1016,8 @@
             logoTrack.appendChild(setDiv);
         }
 
-        // ── CAROUSEL ──
-        // Define slides here. Add as many as you want.
-        // For missing images, a styled placeholder renders automatically — no broken img tags.
+        // ── SPEAKING PHOTOS ──
+        // Add a photo here (file in images/speaking/) and it appears in the gallery.
         const slides = [
             { src: 'images/speaking/event-1.jpg',  caption: 'Abu Dhabi Government Data Academy · Micro-credentials Program' },
             { src: 'images/speaking/event-2.jpeg', caption: 'Government Data Program · Executive Workshop' },
@@ -1005,64 +1036,67 @@
             { src: 'images/speaking/event-15.jpg', caption: 'Business Breakfast Speaker: Enterprise AI Solutions' },
         ];
 
-        const SLIDE_WIDTH = 380;
-        const GAP = 24;
-        const SPEED = 0.6; // px per frame — increase to scroll faster
+        // ── PHOTO GALLERY ──
+        const galleryGrid = document.getElementById('galleryGrid');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+        let current = 0;
+        let lastFocused = null;
 
-        const track = document.getElementById('carouselTrack');
-        let offset = 0;
-        let paused = false;
-        let singleSetWidth = 0;
-
-        function buildSlide(item) {
-            const slide = document.createElement('div');
-            slide.className = 'carousel-slide';
+        slides.forEach((item, i) => {
+            const thumb = document.createElement('button');
+            thumb.type = 'button';
+            thumb.className = 'gallery-thumb';
+            thumb.setAttribute('aria-label', `View photo: ${item.caption}`);
 
             const img = new Image();
+            img.loading = 'lazy';
             img.alt = item.caption;
-
-            img.onload = function() {
-                slide.appendChild(img);
-                const cap = document.createElement('div');
-                cap.className = 'slide-caption';
-                cap.textContent = item.caption;
-                slide.appendChild(cap);
-            };
-
-            img.onerror = function() {
-                const ph = document.createElement('div');
-                ph.className = 'slide-placeholder';
-                ph.textContent = 'Photo coming soon';
-                slide.appendChild(ph);
-            };
-
+            img.onerror = function() { thumb.remove(); };
             img.src = item.src;
-            return slide;
-        }
 
-        // Build two full sets for seamless looping
-        [...slides, ...slides].forEach(item => {
-            track.appendChild(buildSlide(item));
+            const cap = document.createElement('div');
+            cap.className = 'slide-caption';
+            cap.textContent = item.caption;
+
+            thumb.append(img, cap);
+            thumb.addEventListener('click', () => openLightbox(i));
+            galleryGrid.appendChild(thumb);
         });
 
-        singleSetWidth = slides.length * (SLIDE_WIDTH + GAP);
-
-        // Pause on hover
-        track.addEventListener('mouseenter', () => paused = true);
-        track.addEventListener('mouseleave', () => paused = false);
-
-        function animate() {
-            if (!paused) {
-                offset += SPEED;
-                if (offset >= singleSetWidth) {
-                    offset = 0;
-                }
-                track.style.transform = `translateX(-${offset}px)`;
-            }
-            requestAnimationFrame(animate);
+        function showPhoto(i) {
+            current = (i + slides.length) % slides.length;
+            lightboxImg.src = slides[current].src;
+            lightboxImg.alt = slides[current].caption;
+            lightboxCaption.textContent = slides[current].caption;
         }
 
-        animate();
+        function openLightbox(i) {
+            lastFocused = document.activeElement;
+            showPhoto(i);
+            lightbox.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            lightbox.querySelector('.lightbox-close').focus();
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+            document.body.style.overflow = '';
+            if (lastFocused) lastFocused.focus();
+        }
+
+        lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+        lightbox.querySelector('.lightbox-prev').addEventListener('click', () => showPhoto(current - 1));
+        lightbox.querySelector('.lightbox-next').addEventListener('click', () => showPhoto(current + 1));
+        lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+        document.addEventListener('keydown', e => {
+            if (!lightbox.classList.contains('open')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') showPhoto(current - 1);
+            if (e.key === 'ArrowRight') showPhoto(current + 1);
+        });
 
         // ── SCROLL ANIMATIONS ──
         const observer = new IntersectionObserver((entries) => {

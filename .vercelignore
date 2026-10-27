@@ -1,0 +1,7 @@
+# Local-only files — never upload these with `vercel deploy`
+CLAUDE.md
+.claude
+.agents
+skills-lock.json
+.env*
+README.md

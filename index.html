@@ -976,6 +976,7 @@
 
     <footer>
         <p>© 2026 Gautam Verma · Dubai, UAE · Golden Visa Holder</p>
+        <p style="margin-top: 8px; font-size: 11px;">This site records basic visit statistics — approximate location, device and referring site. No IP addresses are stored.</p>
     </footer>
 
     <script>
@@ -1116,6 +1117,70 @@
                 observer.observe(section);
             }
         });
+
+        // ── VISIT TRACKING ──
+        // Sends one summary per browser session when the visitor leaves (see api/visit.mjs).
+        // Open the site once with ?notrack to stop counting your own visits on that browser.
+        (function () {
+            try {
+                const params = new URLSearchParams(location.search);
+                if (params.has('notrack')) localStorage.setItem('notrack', '1');
+                if (localStorage.getItem('notrack') || sessionStorage.getItem('visitSent')) return;
+
+                const visitNumber = Number(localStorage.getItem('visitCount') || 0) + 1;
+                const start = Date.now();
+                const clicks = [];
+                let maxScroll = 0;
+                let sent = false;
+
+                function trackScroll() {
+                    const pct = (scrollY + innerHeight) / document.documentElement.scrollHeight * 100;
+                    if (pct > maxScroll) maxScroll = pct;
+                }
+                trackScroll();
+                addEventListener('scroll', trackScroll, { passive: true });
+
+                document.addEventListener('click', e => {
+                    const link = e.target.closest('a[href]');
+                    if (!link) return;
+                    const href = link.getAttribute('href');
+                    const label = href.startsWith('mailto:') ? 'Email'
+                        : href.startsWith('tel:') ? 'Phone'
+                        : /linkedin/i.test(href) ? 'LinkedIn'
+                        : /\.pdf$/i.test(href) ? 'Download Profile'
+                        : null;
+                    if (label && !clicks.includes(label)) clicks.push(label);
+                });
+
+                function send() {
+                    if (sent) return;
+                    sent = true;
+                    sessionStorage.setItem('visitSent', '1');
+                    localStorage.setItem('visitCount', String(visitNumber));
+                    navigator.sendBeacon('/api/visit', JSON.stringify({
+                        page: location.pathname,
+                        referrer: document.referrer,
+                        utm: {
+                            source: params.get('utm_source'),
+                            medium: params.get('utm_medium'),
+                            campaign: params.get('utm_campaign'),
+                        },
+                        screen: `${screen.width}x${screen.height}`,
+                        language: navigator.language,
+                        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                        visitNumber,
+                        seconds: (Date.now() - start) / 1000,
+                        scroll: maxScroll,
+                        clicks,
+                    }));
+                }
+
+                document.addEventListener('visibilitychange', () => {
+                    if (document.visibilityState === 'hidden') send();
+                });
+                addEventListener('pagehide', send);
+            } catch (e) {}
+        })();
     </script>
 </body>
 </html>
